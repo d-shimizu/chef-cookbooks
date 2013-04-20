@@ -1,6 +1,3 @@
-
-#node.set["sysctl"]["is_oracle_client"] = true
-
 node["oracle"]["client_packages_x86_64"].each do |client_package_x86_64|
   yum_package client_package_x86_64 do
     action :install
@@ -16,13 +13,11 @@ end
 group "dba" do
   gid 501
   ignore_failure true
-  #members node["oracle"]["dbas"]
 end
 
 group "oinstall" do
   gid 502
   ignore_failure true
-  #members node["oracle"]["dbas"]
 end
 
 user "oracle" do
@@ -32,7 +27,14 @@ user "oracle" do
   shell "/bin/bash"
   ignore_failure true
   supports :manage_home => true
-  comment "Oracle Service Account - DBA"
+  comment "Oracle"
+end
+
+template "/home/oracle/.bashrc" do
+  source ".bashrc"
+  group "oracle"
+  owner "oinstall"
+  mode "644"
 end
 
 directory "/u01/app" do
