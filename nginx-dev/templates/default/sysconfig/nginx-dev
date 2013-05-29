@@ -1,0 +1,3 @@
+NGINX=/usr/sbin/nginx
+#NGINX=/usr/sbin/nginx-dev
+CONFFILE=/etc/nginx-dev/nginx-dev.conf
