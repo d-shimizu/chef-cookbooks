@@ -28,6 +28,13 @@ directory "/etc/nginx-dev/conf.d" do
   recursive true
 end
 
+template "/etc/rc.d/init.d/nginx-dev" do
+  source "init.d/nginx-dev"
+  owner "root"
+  group "root"
+  mode 0755
+end
+
 template "/etc/nginx-dev/fastcgi_params" do
   source "nginx-dev/fastcgi_params"
   owner "root"
